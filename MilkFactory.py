@@ -1,17 +1,20 @@
-#now that i know trees this problem makes alot more sense, i have a reason behind the stuff im doing
+#ohhh, had to check sol on this one, graph problem, sol was just indentifying and counting sinks
+
 import sys
 sys.stdin = open('factory.in','r')
 sys.stdout = open('factory.out','w')
 n = int(input())
-edges = [list(map(int,input().split())) for i in range(n-1)]
-adj = [[] for i in range(n+1)]
-for i in edges:
-    adj[i[0]].append(i[1])
-answers = []
+ways = [list(map(int,input().split())) for i in range(n-1)]
+sink = []
 for i in range(1,n+1):
-    if adj[i] == []:
-        answers.append(i)
-if len(answers) == 1:
-    print(answers[0])
-else:
+    p = True
+    for w in ways:
+        if i == w[0]:
+            p = False
+            break
+    if p == True:
+        sink.append(i)
+if len(sink) == 0 or len(sink) > 1:
     print(-1)
+if len(sink) == 1:
+    print(sink[0])
